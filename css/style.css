@@ -1,0 +1,64 @@
+html,
+body {
+    width          : 100%;
+    height         : 100%;
+    margin         : 0;
+    font-family    : sans-serif;
+    padding        : 25px;
+    background     : #FFFFFF;
+    color          : #111111;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+button {
+    background        : none;
+    appearance        : none;
+    -webkit-appearance: none;
+    -ms-appearance    : none;
+    -moz-appearance   : none;
+    border            : none;
+    cursor            : pointer;
+    display           : flex;
+    justify-content   : center;
+    align-items       : center;
+}
+
+.pagination-buttons {
+    display    : flex;
+    align-items: center;
+    gap        : 4px;
+}
+
+.page-btn {
+    background    : #DDDDDD;
+    color         : #2C303A;
+    height        : 35px;
+    border-radius : 2px;
+    padding       : 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition    : background 0.3s ease;
+}
+
+.page-btn:not([class $= '-page']) {
+    width: 35px;
+}
+
+.page-btn[class $= '-page'] {
+    background : #CCCCCC;
+    font-size  : 0.6em;
+    font-weight: bold;
+}
+
+.page-btn.active {
+    background: #717790;
+    color     : #FFFFFF;
+}
