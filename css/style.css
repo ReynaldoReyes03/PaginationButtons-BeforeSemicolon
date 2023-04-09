@@ -62,3 +62,7 @@ button {
     background: #717790;
     color     : #FFFFFF;
 }
+
+.page-btn[disabled] {
+    opacity: 0.3;
+}
