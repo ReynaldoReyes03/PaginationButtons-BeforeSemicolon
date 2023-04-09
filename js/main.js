@@ -18,9 +18,11 @@ const pageNumbers = (total, max, current) => {
 
 function PaginationButtons(totalPages, maxPageVisible = 10, currentPage = 1) {
     let   pages   = pageNumbers(totalPages, maxPageVisible, currentPage);
-    const buttons = new Map();
-
+    
     let currentPageButton = null;
+
+    const buttons  = new Map();
+    const fragment = document.createDocumentFragment();
 
     const paginationButtonsContainer = document.createElement('div');
     paginationButtonsContainer.className = 'pagination-buttons';
@@ -68,11 +70,10 @@ function PaginationButtons(totalPages, maxPageVisible = 10, currentPage = 1) {
     // btn => key
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/forEach
 
-    buttons.forEach((_, btn) => {
-        paginationButtonsContainer.appendChild(btn);
-    });
+    buttons.forEach((_, btn) => fragment.appendChild(btn));
 
     this.render = (container = document.body) => {
+        paginationButtonsContainer.appendChild(fragment);
         container.appendChild(paginationButtonsContainer);
     };
 }
