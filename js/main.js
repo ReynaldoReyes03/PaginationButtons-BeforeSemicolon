@@ -17,32 +17,39 @@ const pageNumbers = (total, max, current) => {
 };
 
 function PaginationButtons(totalPages, maxPageVisible = 10, currentPage = 1) {
-    let   pages   = pageNumbers(totalPages, maxPageVisible, currentPage);
-    
-    let currentPageButton = null;
+    let pages = pageNumbers(totalPages, maxPageVisible, currentPage);
+    console.log(pages);
 
     const buttons  = new Map();
     const fragment = document.createDocumentFragment();
 
+    const disabled = {
+        start: () => pages[0] === 1,
+        prev : () => currentPage === 1,
+        end  : () => pages.slice(-1)[0] === totalPages,
+        next : () => currentPage === totalPages
+    }
+
     const paginationButtonsContainer = document.createElement('div');
     paginationButtonsContainer.className = 'pagination-buttons';
 
-    const createAndSetupButton = (text = '', buttonClass = '') => {
+    const createAndSetupButton = (text = '', buttonClass = '', disabled = false) => {
         const button = document.createElement('button');
 
         button.textContent = text;
-        button.className = `page-btn ${buttonClass}`;
+        button.className   = `page-btn ${buttonClass}`;
+        button.disabled    = disabled;
 
         return button;
     };
 
     buttons.set(
-        createAndSetupButton('start', 'start-page'),
+        createAndSetupButton('start', 'start-page', disabled.start()),
         (btn) => {}
     );
 
     buttons.set(
-        createAndSetupButton('prev', 'prev-page'),
+        createAndSetupButton('prev', 'prev-page', disabled.prev()),
         (btn) => {}
     );
 
@@ -57,12 +64,12 @@ function PaginationButtons(totalPages, maxPageVisible = 10, currentPage = 1) {
     });
 
     buttons.set(
-        createAndSetupButton('next', 'next-page'),
+        createAndSetupButton('next', 'next-page', disabled.next()),
         (btn) => {}
     );
 
     buttons.set(
-        createAndSetupButton('end', 'end-page'),
+        createAndSetupButton('end', 'end-page', disabled.end()),
         (btn) => {}
     );
 
