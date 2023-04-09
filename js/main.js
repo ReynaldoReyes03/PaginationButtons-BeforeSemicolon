@@ -17,12 +17,60 @@ const pageNumbers = (total, max, current) => {
 };
 
 function PaginationButtons(totalPages, maxPageVisible = 10, currentPage = 1) {
-    let pages             = pageNumbers(totalPages, maxPageVisible, currentPage);
+    let   pages   = pageNumbers(totalPages, maxPageVisible, currentPage);
+    const buttons = new Map();
+
     let currentPageButton = null;
 
     const paginationButtonsContainer = document.createElement('div');
     paginationButtonsContainer.className = 'pagination-buttons';
-    paginationButtonsContainer.textContent = 'container';
+
+    const createAndSetupButton = (text = '', buttonClass = '') => {
+        const button = document.createElement('button');
+
+        button.textContent = text;
+        button.className = `page-btn ${buttonClass}`;
+
+        return button;
+    };
+
+    buttons.set(
+        createAndSetupButton('start', 'start-page'),
+        (btn) => {}
+    );
+
+    buttons.set(
+        createAndSetupButton('prev', 'prev-page'),
+        (btn) => {}
+    );
+
+    pages.forEach((pageNumber) => {
+        const isCurrentPage = pageNumber === currentPage;
+        const button        = createAndSetupButton(pageNumber, isCurrentPage ? 'active' : '');
+
+        buttons.set(
+            button,
+            (btn) => {}
+        )
+    });
+
+    buttons.set(
+        createAndSetupButton('next', 'next-page'),
+        (btn) => {}
+    );
+
+    buttons.set(
+        createAndSetupButton('end', 'end-page'),
+        (btn) => {}
+    );
+
+    // _   => value
+    // btn => key
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/forEach
+
+    buttons.forEach((_, btn) => {
+        paginationButtonsContainer.appendChild(btn);
+    });
 
     this.render = (container = document.body) => {
         container.appendChild(paginationButtonsContainer);
